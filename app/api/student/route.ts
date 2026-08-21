@@ -1,0 +1,3 @@
+import {NextRequest,NextResponse} from 'next/server';import {getJson} from '../../../lib/redis';
+const students=['Malcolm N','Madison','Kyle','Kevin','Donnie','Aaliyah','Aiden','Amelia','Benjamin','Caleb','Camila','Carter','Charlotte','Chloe','Daniel','Ella','Ethan','Grace','Harper','Henry'];
+export async function GET(r:NextRequest){const student=r.nextUrl.searchParams.get('student')||'';if(!students.includes(student))return NextResponse.json({error:'Unknown student.'},{status:400});const settings=(await getJson<Record<string,string>>('state-scout:settings'))||{};return NextResponse.json({difficulty:settings[student]||'Standard'},{headers:{'Cache-Control':'no-store'}})}
