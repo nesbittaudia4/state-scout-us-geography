@@ -12,3 +12,5 @@
 
 
 .hint-button{margin-top:12px!important;background:#fff4c6!important;color:#643b00!important;border:2px solid #ffbf3f!important;font-weight:900!important}.kid-hint{margin-top:12px;padding:13px 15px;border-radius:14px;background:#fff7d9;border:2px solid #ffd166;color:#503400;display:grid;gap:4px;font-size:.96rem;line-height:1.35}.kid-hint b{color:#b45309;text-transform:uppercase;font-size:.72rem;letter-spacing:.08em}.kid-hint span{color:#503400}
+
+.student-select{min-height:470px;display:grid;place-content:center;text-align:center;padding:38px;border:2px dashed #56d7d2;border-radius:26px;background:linear-gradient(135deg,#123e61,#0f2f4e);color:#fff}.student-select p{color:#ffd166;font-weight:900;letter-spacing:.12em;font-size:.78rem}.student-select h1{font-size:clamp(2rem,4vw,3.5rem);line-height:1.02;margin:10px 0 16px}.student-select h1 em{color:#ffd166}.student-select span{max-width:420px;color:#d7eef0;font-size:1.05rem;line-height:1.5}
