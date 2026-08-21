@@ -1,4 +1,5 @@
 // @ts-nocheck
+// Shared classroom data is stored under the State Scout namespace.
 'use client';import{useEffect,useMemo,useState}from'react';
 type L='Easier'|'Standard'|'Harder';type A={id:string;student:string;prompt:string;topic:string;given:string;answer:string;correct:boolean;when:string;difficulty:L;xp:number};type Q={prompt:string;answer:string;topic:string;hint:string};
 const kids=['Malcolm N','Madison','Kyle','Kevin','Donnie','Aaliyah','Aiden','Amelia','Benjamin','Caleb','Camila','Carter','Charlotte','Chloe','Daniel','Ella','Ethan','Grace','Harper','Henry'];const palette=['#f97316','#14b8a6','#8b5cf6','#ec4899','#3b82f6'];const states=[['California','Sacramento'],['Texas','Austin'],['Florida','Tallahassee'],['New York','Albany'],['Colorado','Denver'],['Arizona','Phoenix'],['Ohio','Columbus'],['Georgia','Atlanta'],['Maine','Augusta'],['Hawaii','Honolulu'],['Oregon','Salem'],['Kansas','Topeka']];
