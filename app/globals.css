@@ -15,3 +15,15 @@
 
 .student-select{min-height:470px;display:grid;place-content:center;text-align:center;padding:38px;border:2px dashed #56d7d2;border-radius:26px;background:linear-gradient(135deg,#123e61,#0f2f4e);color:#fff}.student-select p{color:#ffd166;font-weight:900;letter-spacing:.12em;font-size:.78rem}.student-select h1{font-size:clamp(2rem,4vw,3.5rem);line-height:1.02;margin:10px 0 16px}.student-select h1 em{color:#ffd166}.student-select span{max-width:420px;color:#d7eef0;font-size:1.05rem;line-height:1.5}
 .reset-class{position:absolute;right:0;top:0;border:1px solid #ff9f9f;border-radius:10px;background:#5f2430;color:#fff1f1;padding:9px 12px;font-size:12px;font-weight:900}.reset-class:hover{background:#8a2f3e}@media(max-width:700px){.reset-class{position:relative;right:auto;top:auto;margin-top:16px}}
+
+/* Elementary mission experience: large, touch-friendly answers and navigation */
+.mission article .answer-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:22px 0 12px}
+.mission article .answer-options button{width:100%;min-height:64px;border:2px solid #c7d9e7;border-radius:16px;background:#082947;color:#fff;padding:14px;font-size:19px;font-weight:800;text-align:center;overflow-wrap:anywhere}
+.mission article .answer-options button.selected{border-color:#ffd45d;background:#275778;box-shadow:0 0 0 2px #ffd45d66}
+.mission article .answer-options button:focus-visible,.mission article .next-mission:focus-visible{outline:4px solid white;outline-offset:3px}
+.mission article .answer-options button:disabled{cursor:default}
+.mission article>button.check-answer,.mission article>button.next-mission{display:block;width:100%;min-height:64px;border:0;border-radius:16px;margin-top:12px;padding:14px 18px;font-size:20px;font-weight:900}
+.mission article>button.check-answer:disabled{opacity:.5;cursor:not-allowed}
+.mission article>button.next-mission{min-height:76px;background:#f7b942;color:#261320;font-size:23px;box-shadow:0 7px 0 #b57926}
+.mission article>button.hint-button{display:block;width:100%;min-height:58px;border-radius:16px;margin-top:12px}
+@media(max-width:700px){.mission article .answer-options{grid-template-columns:1fr}.mission article .answer-options button{min-height:62px;font-size:19px}.mission article>button.next-mission{min-height:80px;font-size:24px}.mission article h2{margin:30px auto 24px}}
