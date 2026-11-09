@@ -68,13 +68,23 @@ const labels=feature(topology,topology.objects.states).features.map((state:any)=
     const gap=([x,y]:[number,number])=>Math.min(...pins.map(({xy:[px,py]})=>Math.hypot(px-x,py-y)));
     return gap(b)-gap(a)||byCenter(a,b);
   })[0]||[centerX,centerY];
-  return{name,x:best[0],y:best[1]};
+  return{name,x:best[0],y:best[1],sourceX:centerX,sourceY:centerY};
 });
+const calloutLayout=[
+  ['Vermont',1005,94],['New Hampshire',1005,114],['Massachusetts',1005,136],['Rhode Island',1005,156],
+  ['Connecticut',1005,178],['New Jersey',1005,218],['Delaware',1005,240],['Maryland',1005,262]
+];
+const labelByName=Object.fromEntries(labels.map(label=>[label.name,label]));
+const smallStateCallouts=calloutLayout.map(([name,x,y])=>({...labelByName[name],name,x,y}));
+const dcPoint=projection([-77.0369,38.9072]);
+if(dcPoint)smallStateCallouts.push({name:'Washington, D.C.',x:1005,y:284,sourceX:dcPoint[0],sourceY:dcPoint[1]});
+const calloutNames=new Set(smallStateCallouts.map(({name})=>name));
 return <div className="explorer parkmap"><p>NATIONAL PARKS FIELD MAP</p><h1>See our National Parks,<br/><em>on a real U.S. map.</em></h1><span>Gold pins use the supplied site coordinates. Click one to open the unit&apos;s location card.</span><div className="unit-map"><div className="map-title">NPS SITE MAP · {pins.length} SUPPLIED LOCATION PINS</div>
-<svg viewBox="0 0 975 610" role="img" aria-label="United States map with National Park Service unit pins"><path className="land" d={path(land)}/>
+<svg viewBox="0 0 1120 610" role="img" aria-label="United States map with National Park Service unit pins"><defs><marker id="state-arrow" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L8,4 L0,8 Z"/></marker></defs><path className="land" d={path(land)}/>
 <path className="borders" d={path(borders)}/>
 {pins.map(({p,xy})=><g key={p.name} className="unit-pin" role="button" tabIndex={0} aria-label={p.name} onClick={()=>setSelected(p)} onKeyDown={e=>e.key==="Enter"&&setSelected(p)}><title>{p.name}</title><circle className="pin-hit" cx={xy[0]} cy={xy[1]} r="15"/><circle className="pin-dot" cx={xy[0]} cy={xy[1]} r="7"/></g>)}
-<g className="state-labels" aria-hidden="true">{labels.map(({name,x,y})=><text key={name} x={x} y={y}>{name}</text>)}</g>
+<g className="state-labels" aria-hidden="true">{labels.filter(({name})=>!calloutNames.has(name)).map(({name,x,y})=><text key={name} x={x} y={y}>{name}</text>)}</g>
+<g className="state-callouts" aria-hidden="true">{smallStateCallouts.map(({name,x,y,sourceX,sourceY})=><g key={name}><line x1={x-7} y1={y-3} x2={sourceX} y2={sourceY} markerEnd="url(#state-arrow)"/><text x={x} y={y}>{name}</text></g>)}</g>
 </svg>
 <div className="map-popover" aria-live="polite"><b>{selected.name}</b><span>📍 {selected.location}</span><p><strong>About this place:</strong> {kidFact(selected.name)}</p></div></div><article className="unit-detail"><img src="https://images.unsplash.com/photo-1473445361085-b9a07f55608b?auto=format&fit=crop&w=900&q=80" alt="Scenic national park landscape"/><div><b>NATIONAL PARK SERVICE SITE</b><h2>{selected.name}</h2><strong>📍 {selected.location}</strong><p>{kidFact(selected.name)} Its pin uses the supplied town coordinate.</p><small>Photo: illustrative public landscape image.</small></div></article></div>}
 function MapLab({onAnswer,target}:{onAnswer:(s:string)=>void;target:string}){const[state,setState]=useState('');return <div className="explorer"><p>INTERACTIVE MAP LAB</p><h1>Practice with the map,<br/><em>one state at a time.</em></h1><span>Use today&apos;s lesson clue to find <b>{target}</b>. It is okay to learn as you go.</span><div className="map">{mapStates.map((s,i)=><button key={s} className={`state s${i}`} onClick={()=>setState(s)}>{s}</button>)}</div><button className="mapcheck" onClick={()=>onAnswer(state)}>Check my map choice →</button></div>}
