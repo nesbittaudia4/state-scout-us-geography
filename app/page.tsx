@@ -50,7 +50,7 @@ const parkCoords={"Alabama":[68,57],"Alaska":[15,86],"Arizona":[28,52],"Arkansas
   if(!xy){const vi=/, VI\b/.test(p.location);xy=vi?[865+(i%5)*20,570+(i%3)*10]:[100+(i%3)*18,575+(i%2)*10]  }
   return{p,xy}
 });
-const labels=Object.entries(parkCoords).filter(([name])=>Object.values(stateCodes).includes(name)).map(([name,[x,y]])=>({name,x:x/100*975,y:y/100*610}));
+const labels=feature(topology,topology.objects.states).features.map((state:any)=>{const[x,y]=path.centroid(state);return{name:state.properties.name,x,y}});
 return <div className="explorer parkmap"><p>NATIONAL PARKS FIELD MAP</p><h1>See our National Parks,<br/><em>on a real U.S. map.</em></h1><span>Gold pins use the supplied site coordinates. Click one to open the unit&apos;s location card.</span><div className="unit-map"><div className="map-title">NPS SITE MAP · {pins.length} SUPPLIED LOCATION PINS</div>
 <svg viewBox="0 0 975 610" role="img" aria-label="United States map with National Park Service unit pins"><path className="land" d={path(land)}/>
 <path className="borders" d={path(borders)}/>
